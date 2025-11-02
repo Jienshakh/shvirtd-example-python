@@ -1,0 +1,10 @@
+Dockerfile
+Dockerfile.python
+.git
+.gitignore
+LICENSE
+README.md
+schema.pdf
+__pycache__
+*.pyc
+
