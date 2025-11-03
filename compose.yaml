@@ -10,7 +10,8 @@ services:
       DB_PASSWORD: ${MYSQL_PASSWORD}
       DB_NAME: ${MYSQL_DATABASE}
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     networks: 
       backend:
         ipv4_address: 172.20.0.5
@@ -24,6 +25,11 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_ROOT_HOST: "%"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      timeout: 5s
+      retries: 30
+      start_period: 10s
     networks:
       backend:
         ipv4_address: 172.20.0.10
