@@ -10,7 +10,7 @@ set -a
 source /home/jien/shvirtd-example-python/.env
 set +a
 
-# Часть 1: Настройка прав в БД
+# Настройка прав в БД
 echo "Настраиваем права пользователя $MYSQL_USER в БД..."
 docker exec shvirtd-example-python-db-1 mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "
 ALTER USER '$MYSQL_USER'@'%' IDENTIFIED WITH mysql_native_password BY '$MYSQL_PASSWORD';
@@ -19,7 +19,7 @@ GRANT PROCESS ON *.* TO '$MYSQL_USER'@'%';
 FLUSH PRIVILEGES;
 "
 
-# Часть 2: Создание бэкапа
+# Создание бэкапа
 echo "Создаем бэкап БД $MYSQL_DATABASE..."
 docker run \
     --rm --entrypoint "" \
@@ -28,4 +28,4 @@ docker run \
     schnitzler/mysqldump \
     mysqldump --opt -h db -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" --result-file="/backup/dump-$(date +%s).sql" "$MYSQL_DATABASE"
 
-echo "Готово! Бэкап сохранен в /opt/backup/"
+echo "Бэкап сохранен в /opt/backup/"
