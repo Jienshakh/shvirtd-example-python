@@ -1,0 +1,4 @@
+FROM hashicorp/terraform:latest as builder
+
+FROM scratch
+COPY --from=builder /bin/terraform /
