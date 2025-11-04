@@ -8,3 +8,11 @@ schema.pdf
 __pycache__
 *.pyc
 venv
+compose.yaml 
+cron
+Dockerfile.lesson6.2
+Dockerfile.python2
+lesson4.sh  
+lesson5.sh  
+proxy.yaml 
+runc
